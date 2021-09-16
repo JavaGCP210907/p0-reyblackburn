@@ -14,9 +14,9 @@ public class ConnectionUtil {
 			e.printStackTrace();
 		}
 		
-		String url = "jdbc:postgresql://localhost:5432/postgres?currentSchema=rauls_wild_kingdom";
-		String username = "postgres";
-		String password = "password";
+		String url = System.getenv("URL");
+		String username = System.getenv("USERNAME");
+		String password = System.getenv("PASSWORD");
 		
 		return DriverManager.getConnection(url, username, password);
 	}

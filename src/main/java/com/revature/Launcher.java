@@ -10,11 +10,11 @@ public class Launcher {
 	public static void main(String[] args) {
 		
 		try(Connection conn = ConnectionUtil.getConnection()){
-			System.out.println("Connection Successful");
+			System.out.println("Hello, connection was successful!!");
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 }
