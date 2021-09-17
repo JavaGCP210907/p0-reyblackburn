@@ -9,7 +9,6 @@ public class Animal {
 	
 	public Animal() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Animal(int animal_id, String animal_type, int animal_quantity, int employee_id_fk) {

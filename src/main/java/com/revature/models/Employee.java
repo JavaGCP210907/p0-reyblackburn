@@ -8,14 +8,23 @@ public class Employee {
 	private String role_title;
 	private int salary;
 	
+	//no-args constructor
 	public Employee() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
+	//all args constructor
 	public Employee(int employee_id, String f_name, String l_name, String role_title, int salary) {
 		super();
 		this.employee_id = employee_id;
+		this.f_name = f_name;
+		this.l_name = l_name;
+		this.role_title = role_title;
+		this.salary = salary;
+	}
+	
+	public Employee(String f_name, String l_name, String role_title, int salary) {
+		super();
 		this.f_name = f_name;
 		this.l_name = l_name;
 		this.role_title = role_title;
