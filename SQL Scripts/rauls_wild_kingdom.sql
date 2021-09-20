@@ -1,35 +1,98 @@
 
---Table for Raul and employees
+--Create tables for jobs, employees, animals, habitats, and enclosures
+CREATE TABLE jobs (
+	job_id serial PRIMARY KEY,
+	job_title TEXT,
+	salary int
+);
+
 CREATE TABLE employees (
 	employee_id serial PRIMARY KEY,
 	f_name TEXT,
 	l_name TEXT,
-	role_title TEXT,
-	salary int
-	);
+	job_id_fk int REFERENCES jobs(job_id)
+);
 
---Table to have animals assigned to individual employees
+CREATE TABLE habitats (
+	habitat_id serial PRIMARY KEY,
+	habitat_type TEXT
+);
+
+CREATE TABLE enclosures (
+	enclosure_id serial PRIMARY KEY,
+	enclosure_type TEXT
+);
+
 CREATE TABLE animals (
 	animal_id serial PRIMARY KEY,
 	animal_type TEXT,
-	animal_quantity int,	
-	employee_id_fk int REFERENCES employees(employee_id)
-	);
-	
+	animal_quantity int,
+	feed_required int,
+	been_fed boolean DEFAULT FALSE,
+	employee_id_fk int REFERENCES employees(employee_id),
+	habitat_id_fk int REFERENCES habitats(habitat_id),
+	enclosure_id_fk int REFERENCES enclosures(enclosure_id)
+);
+
 DROP TABLE IF EXISTS animals;
+DROP TABLE IF EXISTS enclosures;
+DROP TABLE IF EXISTS habitats;
 DROP TABLE IF EXISTS employees;
+DROP TABLE IF EXISTS jobs;
 
 --Intro Values
-INSERT INTO employees (f_name, l_name, role_title, salary)
-VALUES ('Raul', 'Hernandez', 'Star', 100000),
-	   ('Joe', 'Dirt', 'Delivery Driver', 75000);
-	   
-INSERT INTO animals (animal_type, animal_quantity, employee_id_fk)
-VALUES ('Turtles', 1, 1),
-	   ('Ants', 10000, 1),
-	   ('Poodles', 5, 1),
-	   ('Aardvarks', 1, 2),
-	   ('Flamingos', 1, 2),
-	   ('Porcupines', 4, 2),
-	   ('Armadillos', 3, 2);
-	   
+INSERT INTO jobs (job_title, salary)
+VALUES ('Manager', 100000),
+	   ('Wildlife Presenter', 80000),
+	   ('Feeder', 60000);
+	  
+SELECT * FROM jobs;
+
+INSERT INTO employees (f_name, l_name, job_id_fk)
+VALUES ('Raul', 'Hernandez', 2),
+	   ('George', 'Newman', 1),
+	   ('Stanley', 'Spudowski', 3);
+	  
+SELECT * FROM employees JOIN jobs ON job_id_fk = job_id;
+
+INSERT INTO habitats (habitat_type)
+VALUES ('City'),
+	   ('Ocean'),
+	   ('Rivers'),
+	   ('Desert'),
+	   ('Mountain'),
+	   ('Great White North'),
+	   ('Forest');
+	  
+SELECT * FROM habitats;
+
+INSERT INTO enclosures (enclosure_type)
+VALUES ('Glass Cage'),
+	   ('Medium Inside'),
+	   ('Large Inside'),
+	   ('Medium Outside'),
+	   ('Large Outside');
+	  
+SELECT * FROM enclosures;
+
+INSERT INTO animals (animal_type, animal_quantity, feed_required, employee_id_fk, habitat_id_fk, enclosure_id_fk)
+VALUES ('Poodle', 12, 12, 1, 1, 4),
+	   ('Turtle', 1, 1, 1, 2, 2),
+	   ('Hippo', 3, 12, 3, 3, 5),
+	   ('Ant', 1000, 1, 3, 4, 1);
+	  
+SELECT * FROM animals;
+
+SELECT * FROM animals
+	JOIN employees ON employee_id_fk = employee_id
+	JOIN jobs ON job_id_fk = job_id;
+
+SELECT * FROM animals
+	JOIN habitats ON habitat_id_fk = habitat_id
+	JOIN enclosures ON enclosure_id_fk = enclosure_id;
+
+
+
+
+	
+

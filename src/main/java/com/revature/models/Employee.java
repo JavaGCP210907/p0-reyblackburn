@@ -5,36 +5,30 @@ public class Employee {
 	private int employee_id;
 	private String f_name;
 	private String l_name;
-	private String role_title;
-	private int salary;
+	private String job_id_fk;
 	
-	//no-args constructor
 	public Employee() {
 		super();
 	}
 
-	//all args constructor
-	public Employee(int employee_id, String f_name, String l_name, String role_title, int salary) {
+	public Employee(int employee_id, String f_name, String l_name, String job_id_fk) {
 		super();
 		this.employee_id = employee_id;
 		this.f_name = f_name;
 		this.l_name = l_name;
-		this.role_title = role_title;
-		this.salary = salary;
+		this.job_id_fk = job_id_fk;
 	}
-	
-	public Employee(String f_name, String l_name, String role_title, int salary) {
+
+	public Employee(String f_name, String l_name, String job_id_fk) {
 		super();
 		this.f_name = f_name;
 		this.l_name = l_name;
-		this.role_title = role_title;
-		this.salary = salary;
+		this.job_id_fk = job_id_fk;
 	}
 
 	@Override
 	public String toString() {
-		return "Employee [employee_id=" + employee_id + ", f_name=" + f_name + ", l_name=" + l_name + ", role_title="
-				+ role_title + ", salary=" + salary + "]";
+		return "Employee [employee_id=" + employee_id + ", f_name=" + f_name + ", l_name=" + l_name + ", job_id_fk=" + job_id_fk + "]";
 	}
 
 	public int getEmployee_id() {
@@ -61,20 +55,12 @@ public class Employee {
 		this.l_name = l_name;
 	}
 
-	public String getRole_title() {
-		return role_title;
+	public String getJob_id_fk() {
+		return job_id_fk;
 	}
 
-	public void setRole_title(String role_title) {
-		this.role_title = role_title;
-	}
-
-	public int getSalary() {
-		return salary;
-	}
-
-	public void setSalary(int salary) {
-		this.salary = salary;
+	public void setJob_id_fk(String job_id_fk) {
+		this.job_id_fk = job_id_fk;
 	}
 
 	@Override
@@ -83,9 +69,8 @@ public class Employee {
 		int result = 1;
 		result = prime * result + employee_id;
 		result = prime * result + ((f_name == null) ? 0 : f_name.hashCode());
+		result = prime * result + ((job_id_fk == null) ? 0 : job_id_fk.hashCode());
 		result = prime * result + ((l_name == null) ? 0 : l_name.hashCode());
-		result = prime * result + ((role_title == null) ? 0 : role_title.hashCode());
-		result = prime * result + salary;
 		return result;
 	}
 
@@ -105,20 +90,19 @@ public class Employee {
 				return false;
 		} else if (!f_name.equals(other.f_name))
 			return false;
+		if (job_id_fk == null) {
+			if (other.job_id_fk != null)
+				return false;
+		} else if (!job_id_fk.equals(other.job_id_fk))
+			return false;
 		if (l_name == null) {
 			if (other.l_name != null)
 				return false;
 		} else if (!l_name.equals(other.l_name))
 			return false;
-		if (role_title == null) {
-			if (other.role_title != null)
-				return false;
-		} else if (!role_title.equals(other.role_title))
-			return false;
-		if (salary != other.salary)
-			return false;
 		return true;
 	}
+
 	
 	
 
