@@ -39,6 +39,17 @@ public class Animal {
 		this.habitat_id_fk = habitat_id_fk;
 		this.enclosure_id_fk = enclosure_id_fk;
 	}
+	
+	public Animal(String animal_type, int animal_quantity, int feed_requireed, int employee_id_fk,
+			int habitat_id_fk, int enclosure_id_fk) {
+		super();
+		this.animal_type = animal_type;
+		this.animal_quantity = animal_quantity;
+		this.feed_requireed = feed_requireed;
+		this.employee_id_fk = employee_id_fk;
+		this.habitat_id_fk = habitat_id_fk;
+		this.enclosure_id_fk = enclosure_id_fk;
+	}
 
 	@Override
 	public String toString() {

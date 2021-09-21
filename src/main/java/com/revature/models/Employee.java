@@ -5,13 +5,13 @@ public class Employee {
 	private int employee_id;
 	private String f_name;
 	private String l_name;
-	private String job_id_fk;
+	private int job_id_fk;
 	
 	public Employee() {
 		super();
 	}
 
-	public Employee(int employee_id, String f_name, String l_name, String job_id_fk) {
+	public Employee(int employee_id, String f_name, String l_name, int job_id_fk) {
 		super();
 		this.employee_id = employee_id;
 		this.f_name = f_name;
@@ -19,7 +19,7 @@ public class Employee {
 		this.job_id_fk = job_id_fk;
 	}
 
-	public Employee(String f_name, String l_name, String job_id_fk) {
+	public Employee(String f_name, String l_name, int job_id_fk) {
 		super();
 		this.f_name = f_name;
 		this.l_name = l_name;
@@ -55,11 +55,11 @@ public class Employee {
 		this.l_name = l_name;
 	}
 
-	public String getJob_id_fk() {
+	public int getJob_id_fk() {
 		return job_id_fk;
 	}
 
-	public void setJob_id_fk(String job_id_fk) {
+	public void setJob_id_fk(int job_id_fk) {
 		this.job_id_fk = job_id_fk;
 	}
 
@@ -69,7 +69,7 @@ public class Employee {
 		int result = 1;
 		result = prime * result + employee_id;
 		result = prime * result + ((f_name == null) ? 0 : f_name.hashCode());
-		result = prime * result + ((job_id_fk == null) ? 0 : job_id_fk.hashCode());
+		result = prime * result + job_id_fk;
 		result = prime * result + ((l_name == null) ? 0 : l_name.hashCode());
 		return result;
 	}
@@ -90,10 +90,7 @@ public class Employee {
 				return false;
 		} else if (!f_name.equals(other.f_name))
 			return false;
-		if (job_id_fk == null) {
-			if (other.job_id_fk != null)
-				return false;
-		} else if (!job_id_fk.equals(other.job_id_fk))
+		if (job_id_fk != other.job_id_fk)
 			return false;
 		if (l_name == null) {
 			if (other.l_name != null)
@@ -102,6 +99,8 @@ public class Employee {
 			return false;
 		return true;
 	}
+
+	
 
 	
 	
