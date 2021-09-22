@@ -19,7 +19,7 @@ public class EmployeeDao implements EmployeeDaoInterface {
 			
 			ResultSet rs = null;
 			
-			String sql = "select * from employees";
+			String sql = "select * from employees order by employee_id";
 			
 			Statement s = conn.createStatement();
 			

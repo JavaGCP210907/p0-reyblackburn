@@ -43,7 +43,7 @@ public class EnclosureDao implements EnclosureDaoInterface {
 			
 			ResultSet rs = null;
 			
-			String sql = "select * from enclosures";
+			String sql = "select * from enclosures order by enclosure_id";
 			
 			Statement s = conn.createStatement();
 			

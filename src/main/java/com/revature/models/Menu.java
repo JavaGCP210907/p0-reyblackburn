@@ -23,7 +23,7 @@ public class Menu {
 		boolean displayMenu = true;
 		
 		Scanner scan = new Scanner(System.in);
-		//Logger log = LogManager.getLogger(Menu.class);
+		Logger log = LogManager.getLogger(Menu.class);
 		
 		//Greeting
 		System.out.println();
@@ -49,6 +49,9 @@ public class Menu {
 				for(Employee emp : employees) {
 					System.out.println(emp);
 				}
+				
+				log.info("USER LOOKED AT ALL EMPLOYEES");
+				
 				break;
 			}
 				
@@ -58,6 +61,8 @@ public class Menu {
 				for(Animal ani: animals) {
 					System.out.println(ani);
 				}
+
+				log.info("USER LOOKED AT ALL ANIMALS");
 				
 				break;
 			}
@@ -83,6 +88,8 @@ public class Menu {
 					System.out.println(a);
 				}
 				
+				log.info("USER LOOKED AT ANIMALS BY EMPLOYEE ID: " + id);
+				
 				break;
 			}
 			
@@ -90,7 +97,7 @@ public class Menu {
 				
 				System.out.println("Enter the Habitat to get the animals that inhabit that area: (Case Sensitive!)");
 				
-				//add way to display habitat here
+				//added way to display habitat here
 				List<Habitat> habitats = hDao.getHabitats();
 				
 				for(Habitat h: habitats) {
@@ -104,6 +111,8 @@ public class Menu {
 				for(Animal a : animals) {
 					System.out.println(a);
 				}
+				
+				log.info("USER LOOKED AT ANIMALS BY " + habitatInput);
 				
 				break;
 			}
@@ -133,34 +142,54 @@ public class Menu {
 				
 				aDao.updateEnclosure(animalInput, enclosure);
 				
+				log.info("USER UPDATED " + animalInput + " TO UPDATE ENCLOSURE");
+				
 				break;
 			}
 			
 			case "ANIMALQUANTITY": {
 				
-				System.out.println("Enter the Animal you would like to update");
+				System.out.println("Enter the Animal you would like to update (Case Sensitive)");
+				
+				List<Animal> animals = aDao.getAnimals();
+				
+				for(Animal ani: animals) {
+					System.out.println(ani.getAnimal_type());
+				}
+				
 				String animalInput = scan.nextLine();
 				
 				System.out.println("Please input the new count for animals");
 				int countInput = scan.nextInt();
 				scan.nextLine();
 				
-				aDao.updateQuantity(animalInput, countInput);				
+				aDao.updateQuantity(animalInput, countInput);		
+				
+				log.info("USER UPDATED " + animalInput + " QUANTITY TO " + countInput);
+				
 				break;
 			}
 			
 			case "ANIMALFED": {
 				
-				System.out.println("Please put in the animal name:");
+				System.out.println("Please put in the animal name: (Case Sensitive)");
+				List<Animal> animals = aDao.getAnimals();
+				
+				for(Animal ani: animals) {
+					System.out.println(ani.getAnimal_type());
+				}
+				
 				String type = scan.nextLine();
 				
 				System.out.println("Has the animal been fed? Y/N");
 				String fed = scan.nextLine();
 				
-				if (fed == "Y") {
+				if (fed.toUpperCase().equals("Y")) {
 					aDao.updateFed(type, true);
-				} else if (fed == "N") {
+					log.info("USER UPDATED " + type + " FED STATUS");
+				} else if (fed.toUpperCase().equals("N")) {
 					aDao.updateFed(type, false);
+					log.info("USER UPDATED " + type + " FED STATUS");
 				} else {
 					System.out.println("Input not recognized");
 				}
@@ -170,7 +199,7 @@ public class Menu {
 			
 			case "ADDANIMALS": {
 				
-				System.out.println("Please enter animal type:");
+				System.out.println("Please enter animal type: (Case Sensitive)");
 				String type = scan.nextLine();
 				
 				if(type.toUpperCase().equals("BADGER")) {
@@ -187,14 +216,35 @@ public class Menu {
 				scan.nextLine();
 				
 				System.out.println("Please put in the employee id for which employee will care for " + type);
+				
+				List<Employee> employees = eDao.getEmployees();
+				
+				for(Employee e : employees) {
+					System.out.println(e.getEmployee_id() + " is the ID for " + e.getF_name() + " " + e.getL_name());
+				}
+				
 				int employee = scan.nextInt();
 				scan.nextLine();
 				
 				System.out.println("Please put in the habitat id for the habitat the " + type + " inhabits");
+				
+				List<Habitat> habitats = hDao.getHabitats();
+				
+				for(Habitat h: habitats) {
+					System.out.println(h.getHabitat_id() + " is the ID for " + h.getHabitat_type());
+				}
+				
 				int habitat = scan.nextInt();
 				scan.nextLine();
 				
 				System.out.println("Please put in the enclosure id for the enclosure " + type + " will be placed in");
+				
+				List<Enclosure> enclosures = enDao.getEnclosures();
+				
+				for(Enclosure enc : enclosures) {
+					System.out.println(enc.getEnclosure_id() + " is the ID for " + enc.getEnclosure_type());
+				}
+				
 				int enclosure = scan.nextInt();
 				scan.nextLine();
 				
@@ -202,7 +252,7 @@ public class Menu {
 				
 				aDao.addAnimal(ani);
 				
-				//log.info("USER ADDED ANIMAL DATA");
+				log.info("USER ADDED " + type + " DATA");
 				break;
 			}
 			
@@ -210,12 +260,18 @@ public class Menu {
 				
 				System.out.println("Please put in Animal Id to delete Animal information");
 				
+				List<Animal> animals = aDao.getAnimals();
+				
+				for(Animal ani: animals) {
+					System.out.println(ani.getAnimal_id() + " is the ID for " + ani.getAnimal_type());
+				}
+				
 				int id = scan.nextInt();
 				scan.nextLine();
 				
 				aDao.removeAnimal(id);
 				
-				//log.info("USER REMOVED ANIMAL DATA");
+				log.info("USER REMOVED ANIMAL DATA");
 				break;
 			}
 			
@@ -223,7 +279,7 @@ public class Menu {
 				
 				aDao.fly();
 				
-				//log.info("USER TRIED TO MAKE A POODLE FLY");
+				log.info("USER TRIED TO MAKE A POODLE FLY");
 				break;
 			}
 			
@@ -236,7 +292,7 @@ public class Menu {
 				
 				enDao.addEnclosure(enclosure);
 				
-				//log.info("USER ADDED NEW ENCLOSURE");
+				log.info("USER ADDED NEW ENCLOSURE");
 				break;
 			}
 			

@@ -19,7 +19,7 @@ public class HabitatDao implements HabitatDaoInterface {
 			
 			ResultSet rs = null;
 			
-			String sql = "select * from habitats";
+			String sql = "select * from habitats order by habitat_id";
 			
 			Statement s = conn.createStatement();
 			

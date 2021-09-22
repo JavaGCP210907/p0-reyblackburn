@@ -20,7 +20,7 @@ public class AnimalDao implements AnimalDaoInterface {
 			
 			ResultSet rs = null;
 			
-			String sql = "select * from animals";
+			String sql = "select * from animals order by animal_id";
 			
 			Statement s = conn.createStatement();
 			
@@ -185,11 +185,11 @@ public class AnimalDao implements AnimalDaoInterface {
 		
 		try(Connection conn = ConnectionUtil.getConnection()) {
 			
-			String sql = "update animals set animal_fed = ? where animal_type = ?";
+			String sql = "update animals set been_fed = ? where animal_type = ?";
 			
 			PreparedStatement ps = conn.prepareStatement(sql);
 			
-			ps.setBoolean(1,  yes);;
+			ps.setBoolean(1,  true);
 			ps.setString(2,  animalName);
 			
 			ps.executeUpdate();
