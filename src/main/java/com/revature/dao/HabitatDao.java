@@ -7,38 +7,36 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.revature.models.Employee;
+import com.revature.models.Habitat;
 import com.revature.utils.ConnectionUtil;
 
-public class EmployeeDao implements EmployeeDaoInterface {
+public class HabitatDao implements HabitatDaoInterface {
 
 	@Override
-	public List<Employee> getEmployees() {
+	public List<Habitat> getHabitats() {
 		
 		try(Connection conn = ConnectionUtil.getConnection()) {
 			
 			ResultSet rs = null;
 			
-			String sql = "select * from employees";
+			String sql = "select * from habitats";
 			
 			Statement s = conn.createStatement();
 			
 			rs = s.executeQuery(sql);
 			
-			List<Employee> employeeList = new ArrayList<>();
+			List<Habitat> habitatList = new ArrayList<>();
 			
 			while(rs.next()) {
-				Employee e = new Employee(
-						rs.getInt("employee_id"),
-						rs.getString("f_name"),
-						rs.getString("l_name"),
-						rs.getInt("job_id_fk")
+				Habitat h = new Habitat(
+						rs.getInt("habitat_id"),
+						rs.getString("habitat_type")
 						);
 				
-				employeeList.add(e);
+				habitatList.add(h);
 			}
 			
-			return employeeList;
+			return habitatList;
 			
 		} catch(SQLException e) {
 			System.out.println("Could not get list of employees");
@@ -47,7 +45,5 @@ public class EmployeeDao implements EmployeeDaoInterface {
 		
 		return null;
 	}
-
-	
 
 }

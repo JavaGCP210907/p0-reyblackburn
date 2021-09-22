@@ -9,12 +9,14 @@ import org.apache.logging.log4j.Logger;
 import com.revature.dao.AnimalDao;
 import com.revature.dao.EmployeeDao;
 import com.revature.dao.EnclosureDao;
+import com.revature.dao.HabitatDao;
 
 public class Menu {
 	
 	EmployeeDao eDao = new EmployeeDao();
 	AnimalDao aDao = new AnimalDao();
 	EnclosureDao enDao = new EnclosureDao();
+	HabitatDao hDao = new HabitatDao();
 
 	public void displayMenu() {
 		
@@ -62,6 +64,15 @@ public class Menu {
 				
 			case "ANIMALSBYEMPLOYEESID": {
 				
+				//code for getting employee ID and name
+				System.out.println("Here are the employees names and ID's");
+				
+				List<Employee> employees = eDao.getEmployees();
+				
+				for(Employee e : employees) {
+					System.out.println(e.getEmployee_id() + " is the id for " + e.getF_name() + " " + e.getL_name());
+				}
+				
 				System.out.println("Enter the Employee's ID Number to get the animals they care for: ");
 				int id = scan.nextInt();
 				scan.nextLine();
@@ -78,7 +89,14 @@ public class Menu {
 			case "ANIMALSBYHABITAT": {
 				
 				System.out.println("Enter the Habitat to get the animals that inhabit that area: (Case Sensitive!)");
-				System.out.println("Types of Habitats: 'City', 'Mountain', 'Forest'");
+				
+				//add way to display habitat here
+				List<Habitat> habitats = hDao.getHabitats();
+				
+				for(Habitat h: habitats) {
+					System.out.println(h.getHabitat_type());
+				}
+				
 				String habitatInput = scan.nextLine();
 				
 				List<Animal> animals = aDao.getAnimalsByHabitat(habitatInput);
@@ -92,14 +110,28 @@ public class Menu {
 			
 			case "UPDATEENCLOSURE": {
 				
-				System.out.println("Enter the Animal you would like to update");
+				System.out.println("Enter the Animal you would like to update: (Case Sensitive)");
+				
+				List<Animal> animals = aDao.getAnimals();
+				
+				for(Animal ani: animals) {
+					System.out.println(ani.getAnimal_type());
+				}
+				
 				String animalInput = scan.nextLine();
 				
 				System.out.println("Please input the new enclosure id for " + animalInput);
+				
+				List<Enclosure> enclosures = enDao.getEnclosures();
+				
+				for(Enclosure enc : enclosures) {
+					System.out.println(enc.getEnclosure_id() + " is the ID for " + enc.getEnclosure_type());
+				}
+				
 				int enclosure = scan.nextInt();
 				scan.nextLine();
 				
-				aDao.updateQuantity(animalInput, enclosure);
+				aDao.updateEnclosure(animalInput, enclosure);
 				
 				break;
 			}
@@ -235,13 +267,13 @@ public class Menu {
 		
 		System.out.println("Employees -> Shows a list of all employees");//completed
 		System.out.println("Animals -> Shows a list of all animals");//Completed
-		System.out.println("AnimalsByEmployeeID -> Shows all animals assigned to an employee by employee id");//Completed
+		System.out.println("AnimalsByEmployeesID -> Shows all animals assigned to an employee by employee id");//Completed
 		System.out.println("---------------------------------------------------------------");
 		System.out.println("AnimalsByHabitat -> Shows all animals in a specific habitat");//Completed
-		System.out.println("UpdateEnclosure -> Change an animals enclosure");//Completed
+		System.out.println("UpdateEnclosure -> Change an animals enclosure");//Update
 		System.out.println("AnimalQuantity -> Increase or Decrease Number of Specific Animal");//completed
 		System.out.println("---------------------------------------------------------------");
-		System.out.println("AnimalFed -> Update if Animal has been fed");
+		System.out.println("AnimalFed -> Update if Animal has been fed");//Completed
 		System.out.println("AddAnimals -> Add Animal to Raul's Wild Kingdom");//Completed
 		System.out.println("RemoveAnimal -> Remove Animal from Raul's Wild Kingdom");//Completed
 		System.out.println("---------------------------------------------------------------");

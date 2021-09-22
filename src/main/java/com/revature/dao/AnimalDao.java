@@ -20,7 +20,7 @@ public class AnimalDao implements AnimalDaoInterface {
 			
 			ResultSet rs = null;
 			
-			String sql = "select * from employees";
+			String sql = "select * from animals";
 			
 			Statement s = conn.createStatement();
 			
